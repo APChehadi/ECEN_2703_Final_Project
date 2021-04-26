@@ -48,7 +48,7 @@ d = inverse_mod(e, phi_n)
 print('d =', d)
 
 # Bob's Public Key
-print('Bob Public Key (n, e): ', (n,e))
+print('\nBob Public Key (n, e): ', (n,e))
 
 # Bob's Private Key
 print('Bob Private Key (n, d): ', (n,d))
@@ -58,7 +58,7 @@ print('Bob Private Key (n, d): ', (n,d))
 """
     Alice enters plaintext message, and encrypts message
 """
-input_message = input("\nEnter message: ")
+input_message = input("\nEnter Message: ")
 
 # Computes the cyphertext C value by modular exponentiation
 def encrypt_decrypt_message(char_val, enc_dec_bool):
@@ -72,7 +72,7 @@ def encrypt_decrypt_message(char_val, enc_dec_bool):
     else:
         M = inverse_mod(char_val**d, n)
         if M == None:
-            print('No modular inverse for ' + str(cyphertext_C))
+            print('No modular inverse for ' + str(char_val))
         return M
 
 # Copmute numeric value of each string character, and encrypt each character
@@ -81,8 +81,14 @@ def numeric_string_conversion(message, enc_dec_bool):
     return(''.join([chr(encrypt_decrypt_message(ord(char), enc_dec_bool)) for char in list(message)]))
 
 cyphertext_C = numeric_string_conversion(input_message, True)
-print('Alice Encrypted message / cyphertext C: ', cyphertext_C)
+print('Alice Encrypted Message / cyphertext C: ', cyphertext_C)
 
+
+
+"""
+    Bob decryptes (Alice's cyphertext) message
+"""
+print('Decrypting...')
 plaintext_M = numeric_string_conversion(cyphertext_C, False)
-print('Bob Decrypted message / plaintext_M: ', plaintext_M)
+print('Bob Decrypted Message / plaintext_M: ', plaintext_M)
 
